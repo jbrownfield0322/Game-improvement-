@@ -116,6 +116,23 @@ def runGame():
 
         if score == 5:
             
+            gameOverFont = pygame.font.Font('freesansbold.ttf', 150)            #######ADDED A YOU WON SCREEN :):):):):):):)  (fially)######################
+            gameSurf = gameOverFont.render('You', True, WHITE)
+            overSurf = gameOverFont.render('Won', True, WHITE)
+            gameRect = gameSurf.get_rect()
+            overRect = overSurf.get_rect()
+            gameRect.midtop = (WINDOWWIDTH / 2, 10)
+            overRect.midtop = (WINDOWWIDTH / 2, gameRect.height + 10 + 25)
+
+            DISPLAYSURF.blit(gameSurf, gameRect)
+            DISPLAYSURF.blit(overSurf, overRect)
+            drawPressKeyMsg()
+            pygame.display.update()
+            pygame.time.wait(500)
+            #KRT 14/06/2012 rewrite event detection to deal with mouse use
+            pygame.event.get()  #clear out event queue 
+            showStartScreen() #takes you back to the start screen
+            
 
 def drawPressKeyMsg():
     pressKeySurf = BASICFONT.render('Press a key to play.', True, DARKGRAY)
@@ -232,7 +249,6 @@ def drawGrid():
         pygame.draw.line(DISPLAYSURF, DARKGRAY, (x, 0), (x, WINDOWHEIGHT))
     for y in range(0, WINDOWHEIGHT, CELLSIZE): # draw horizontal lines
         pygame.draw.line(DISPLAYSURF, DARKGRAY, (0, y), (WINDOWWIDTH, y))
-
 
 
 
