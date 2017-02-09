@@ -24,6 +24,7 @@ RED       = (255,   0,   0)
 GREEN     = (  0, 0,   255)
 DARKGREEN = (  0, 155,   0)
 DARKGRAY  = ( 40,  40,  40)
+BLUE      = (  0,   0, 255)  #added the color BLUE to the colors
 BGCOLOR = BLACK
 
 UP = 'up'
@@ -40,7 +41,7 @@ def main():
     FPSCLOCK = pygame.time.Clock()
     DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
     BASICFONT = pygame.font.Font('freesansbold.ttf', 18)
-    pygame.display.set_caption('Wormy easy')
+    pygame.display.set_caption('Wormy easy')# Renamed it Wormy Easy
 
     showStartScreen()
     while True:
@@ -49,6 +50,7 @@ def main():
 
 
 def runGame():
+    score = 0 # added a score thingy
     # Set a random start point.
     startx = random.randint(5, CELLWIDTH - 6)
     starty = random.randint(5, CELLHEIGHT - 6)
@@ -89,6 +91,7 @@ def runGame():
         if wormCoords[HEAD]['x'] == apple['x'] and wormCoords[HEAD]['y'] == apple['y']:
             # don't remove worm's tail segment
             apple = getRandomLocation() # set a new apple somewhere
+            score += 1# added a score thing to make a you win thing
          
         else:
             del wormCoords[-1] # remove worm's tail segment
@@ -110,6 +113,9 @@ def runGame():
         drawScore(len(wormCoords) - 3)
         pygame.display.update()
         FPSCLOCK.tick(FPS)
+
+        if score == 5:
+            
 
 def drawPressKeyMsg():
     pressKeySurf = BASICFONT.render('Press a key to play.', True, DARKGRAY)
@@ -135,9 +141,9 @@ def checkForKeyPress():
     
 def showStartScreen():
     titleFont = pygame.font.Font('freesansbold.ttf', 100)
-    titleSurf1 = titleFont.render('Wormy!', True, WHITE, DARKGREEN)
-    titleSurf2 = titleFont.render('Wormy!', True, GREEN)
-
+    titleSurf1 = titleFont.render('Wormy Easy!', True, WHITE, DARKGREEN)
+    titleSurf2 = titleFont.render('Wormy Easy!', True, GREEN)
+    titleSurf3 = titleFont.render('Wormy Easy!', True, BLUE) # added another spinning title screen changed the color to blue
     degrees1 = 0
     degrees2 = 0
     
@@ -211,7 +217,7 @@ def drawWorm(wormCoords):
         wormSegmentRect = pygame.Rect(x, y, CELLSIZE, CELLSIZE)
         pygame.draw.rect(DISPLAYSURF, DARKGREEN, wormSegmentRect)
         wormInnerSegmentRect = pygame.Rect(x + 4, y + 4, CELLSIZE - 8, CELLSIZE - 8)
-        pygame.draw.rect(DISPLAYSURF, GREEN, wormInnerSegmentRect)
+        pygame.draw.rect(DISPLAYSURF, BLUE, wormInnerSegmentRect) #Changed the color of the inside of wormy to blue
 
 
 def drawApple(coord):
@@ -226,6 +232,24 @@ def drawGrid():
         pygame.draw.line(DISPLAYSURF, DARKGRAY, (x, 0), (x, WINDOWHEIGHT))
     for y in range(0, WINDOWHEIGHT, CELLSIZE): # draw horizontal lines
         pygame.draw.line(DISPLAYSURF, DARKGRAY, (0, y), (WINDOWWIDTH, y))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
 
 
 if __name__ == '__main__':
