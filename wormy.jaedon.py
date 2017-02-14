@@ -55,9 +55,9 @@ def runGame():
     startx = random.randint(5, CELLWIDTH - 6)
     starty = random.randint(5, CELLHEIGHT - 6)
     wormCoords = [{'x': startx,     'y': starty},
-                  {'x': startx - 1, 'y': starty},
-                  {'x': startx - 2, 'y': starty}]
-    direction = RIGHT
+                  {'x': startx + 1, 'y': starty},
+                  {'x': startx + 2, 'y': starty}]
+    direction = Left
 
     # Start the apple in a random place.
     apple = getRandomLocation()
